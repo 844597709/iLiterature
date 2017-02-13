@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +16,8 @@ import java.util.Map;
 public class AuthorDao {
 	@Resource
 	private SqlSession sqlSession;
-	@Resource
-	HttpServletRequest request;
+//	@Resource
+//	HttpServletRequest request;
 
 	public int selectCount(ListQuery query) throws Exception {
 		return sqlSession.selectOne("author.selectCount", query);

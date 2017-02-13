@@ -1,23 +1,19 @@
 package com.swust.kelab.repos;
 
-import java.util.HashMap;
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
+import com.swust.kelab.domain.Site;
+import com.swust.kelab.repos.bean.ListQuery;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.swust.kelab.domain.Site;
-import com.swust.kelab.repos.bean.ListQuery;
+import javax.annotation.Resource;
+import java.util.List;
 
 @Repository(value = "siteDao")
 public class SiteDao {
 	@Resource
 	private SqlSession sqlSession;
-	@Resource
-	HttpServletRequest request;
+//	@Resource
+//	HttpServletRequest request;
 
 	// --zd--
 	public List<Site> selectSite() throws Exception {

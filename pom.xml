@@ -90,7 +90,6 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.4.1</version>
 		</dependency>
-
 		<!-- 事务配置 -->
 		<dependency>
 			<groupId>cglib</groupId>
@@ -117,10 +116,22 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- 数据库连接配置 -->
+		<!--mysql-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>6.0.5</version>
+		</dependency>
+		<!--mongo-->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>1.9.6.RELEASE</version>
 		</dependency>
 		<!-- DBCP数据源配置 -->
 		<dependency>
@@ -166,12 +177,12 @@
 		<!--json解析工具-->
 		<!--序列化jackson性能最好，反序列化三者差不多，gson略差-->
 		<!--fastjson工具包-->
-		<!--<dependency>
+		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.23</version>
 			<scope>compile</scope>
-		</dependency>-->
+		</dependency>
 		<!--gson工具包-->
 		<!--<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -230,8 +241,45 @@
 		</dependency>-->
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<profile.name>test</profile.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>online</id>
+			<properties>
+				<profile.name>online</profile.name>
+			</properties>
+		</profile>
+	</profiles>
+
 	<build>
 		<finalName>iLiterature</finalName>
+		<filters> <!-- 指定使用的 filter -->
+			<filter>settings/${profile.name}.properties</filter>
+		</filters>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>settings.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>settings.properties</exclude>
+				</excludes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -239,8 +287,40 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>iliterature-${profile.name}-${project.version}</warName>
+					<webResources>
+						<resource>
+							<directory>target</directory>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+			<!--<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0-alpha-2</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<files>
+								<file>settings/${profile.name}.properties</file>
+							</files>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>-->
 
 			<!-- 配置mvn site输出内容 -->
 			<!-- Default Site Pages -->

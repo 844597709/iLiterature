@@ -1,21 +1,19 @@
 package com.swust.kelab.repos;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import com.swust.kelab.domain.WebSite;
+import com.swust.kelab.repos.bean.ListQuery;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.swust.kelab.domain.WebSite;
-import com.swust.kelab.repos.bean.ListQuery;
+import javax.annotation.Resource;
+import java.util.List;
 
 @Repository(value = "webSiteDao")
 public class WebSiteDao {
     @Resource
     private SqlSession sqlSession;
-    @Resource
-    HttpServletRequest request;
+//    @Resource
+//    HttpServletRequest request;
     
     public int selectCount(ListQuery query) throws Exception {
         return sqlSession.selectOne("webSite.selectCount", query);

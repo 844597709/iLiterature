@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class GenericModelDao<T> extends AbstractModelDao implements ModelDao<T> {
+public class GenericModelDao<T> /*extends AbstractModelDao*/ implements ModelDao<T> {
 
     // SQL_ID列表
     protected final String SQL_SELECT;

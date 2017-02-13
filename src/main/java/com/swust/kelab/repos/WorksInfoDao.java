@@ -1,31 +1,22 @@
 package com.swust.kelab.repos;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
+import com.swust.kelab.domain.*;
+import com.swust.kelab.repos.bean.ListQuery;
+import com.swust.kelab.web.model.AuthorWorkUpdate;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.swust.kelab.domain.Area;
-import com.swust.kelab.domain.Author;
-import com.swust.kelab.domain.Comment;
-import com.swust.kelab.domain.WorkDescription;
-import com.swust.kelab.domain.WorkDetail;
-import com.swust.kelab.domain.WorksInfo;
-import com.swust.kelab.domain.WorksUpdate;
-import com.swust.kelab.repos.bean.ListQuery;
-import com.swust.kelab.web.model.AuthorWorkUpdate;
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Repository(value = "worksInfoDao")
 public class WorksInfoDao {
     @Resource
     private SqlSession sqlSession;
-    @Resource
-    HttpServletRequest request;
+//    @Resource
+//    HttpServletRequest request;
     
     
     //--ljf--
