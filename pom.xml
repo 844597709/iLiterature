@@ -5,11 +5,12 @@
 	<artifactId>iLiterature</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0-SNAPSHOT</version>
+	<url>http://maven.apache.org</url>
 
 	<properties>
-		<!--<spring.version>4.3.5.RELEASE</spring.version>-->
+		<spring.version>4.3.5.RELEASE</spring.version>
 		<!--spring3才有MappingJacksonJsonView,spring4升级为MappingJackson2JsonView,代码有改变-->
-		<spring.version>3.2.18.RELEASE</spring.version>
+		<!--<spring.version>3.2.18.RELEASE</spring.version>-->
 	</properties>
 	<dependencies>
 		<!--http配置-->

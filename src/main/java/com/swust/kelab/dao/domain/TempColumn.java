@@ -1,4 +1,4 @@
-package com.swust.kelab.domain.model;
+package com.swust.kelab.dao.domain;
 
 public class TempColumn {
     private Integer coluId;

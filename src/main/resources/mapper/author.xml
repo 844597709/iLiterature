@@ -268,6 +268,8 @@
 			</if>
 		</where>
 	</select>
+
+	<!--地名有问题：黑龙江-黑龙；内蒙古-内蒙-->
 	<!-- 地区信息-->
 	<select id="countAreaInfo" resultType="com.swust.kelab.domain.Area" parameterType="java.util.HashMap">
 		SELECT

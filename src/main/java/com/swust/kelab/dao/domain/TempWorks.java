@@ -1,9 +1,11 @@
-package com.swust.kelab.domain.model;
+package com.swust.kelab.dao.domain;
+
+import com.swust.kelab.dao.query.BaseModel;
 
 /**
  * Created by zengdan on 2017/1/6.
  */
-public class TempWorks {
+public class TempWorks extends BaseModel {
     private Integer workId;
     private Integer workWebsiteId;
     private String workUrl;

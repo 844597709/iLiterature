@@ -51,7 +51,8 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
 		<property name="mapperLocations" value="classpath:mapper/*.xml" />
-		<property name="typeAliasesPackage" value="com.swust.kelab.domain" />
+		<!--<property name="mapperLocations" value="classpath:mapper/temp/*.xml" />-->
+		<property name="typeAliasesPackage" value="com.swust.kelab.dao.domain" />
 	</bean>
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />

@@ -1,24 +1,24 @@
 package com.swust.kelab.dao;
 
 import com.mongodb.BasicDBObject;
-import com.swust.kelab.dao.domain.TempAuthor;
+import com.swust.kelab.dao.domain.TempWorks;
 import com.swust.kelab.dao.query.BaseDao;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by zengdan on 2017/2/9.
  */
-@Component("authorDao")
-public class AuthorDao extends BaseDao<TempAuthor> {
+@Component("worksDao")
+public class WorksDao extends BaseDao<TempWorks> {
     @Override
     public void init() {
-        super.collection = "author";
+        super.collection = "works";
     }
 
     @Override
-    public boolean updateOrSave(TempAuthor entity) {
-        if(entity.getAuthId()!=null){//更新
-            BasicDBObject query = new BasicDBObject("authId", entity.getAuthId());
+    public boolean updateOrSave(TempWorks entity) {
+        if(entity.getWorkId()!=null){//更新
+            BasicDBObject query = new BasicDBObject("workId", entity.getWorkId());
             BasicDBObject update = new BasicDBObject("$set", entity);
             super.getDBCollection().update(query, update);
             return true;
@@ -34,10 +34,10 @@ public class AuthorDao extends BaseDao<TempAuthor> {
     }*/
 
     @Override
-    public TempAuthor findById(Integer id) {
-        BasicDBObject query = new BasicDBObject("authId", id);
-        TempAuthor author = decode(super.getDBCollection().findOne(query), TempAuthor.class);
-        return author;
+    public TempWorks findById(Integer id) {
+        BasicDBObject query = new BasicDBObject("workId", id);
+        TempWorks work = decode(super.getDBCollection().findOne(query), TempWorks.class);
+        return work;
     }
 
     /*@Override
@@ -48,4 +48,5 @@ public class AuthorDao extends BaseDao<TempAuthor> {
         List<Author> list = decode(super.getDBCollection().find(query), Author.class);
         return list;
     }*/
+
 }

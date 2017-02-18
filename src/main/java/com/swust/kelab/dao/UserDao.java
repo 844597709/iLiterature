@@ -1,12 +1,9 @@
 package com.swust.kelab.dao;
 
 
-import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.swust.kelab.dao.model.User;
 import com.swust.kelab.dao.query.BaseDao;
-
-import java.util.List;
 
 /**
  * 用户
@@ -29,12 +26,12 @@ public class UserDao extends BaseDao<User>{
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean delete(Integer id) {
         BasicDBObject query = new BasicDBObject("userId", id);
         super.getDBCollection().findAndRemove(query);
         return true;
-    }
+    }*/
 
     @Override
     public User findById(Integer id) {
@@ -43,12 +40,12 @@ public class UserDao extends BaseDao<User>{
         return user;
     }
 
-    @Override
+    /*@Override
     public List<User> getBusinessesByIds(List<Integer> ids) {
         BasicDBList values = new BasicDBList();
         values.addAll(ids);
         BasicDBObject query = new BasicDBObject("$in", values);
         List<User> list = decode(super.getDBCollection().find(query), User.class);
         return list;
-    }
+    }*/
 }

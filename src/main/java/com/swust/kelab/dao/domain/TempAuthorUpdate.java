@@ -1,30 +1,29 @@
-package com.swust.kelab.dao.model;
+package com.swust.kelab.dao.domain;
 
-public class AuthorUpdate {
+public class TempAuthorUpdate {
+	private Integer auupId;
+	private Integer auupAuthId;
+	private String auupTime;
+	private String auupGrade;
+	private String auupAttr1;
+	private String auupAttr2;
+	private String auupAttr3;
+	private String auupAttr4;
+	private String auupAttr5;
 
-	public int auupAuthId;
-	public String auupTime;
-	public String auupGrade;
-	public String auupAttr1;
-	public String auupAttr2;
-	public String auupAttr3;
-	public String auupAttr4;
-	public String auupAttr5;
-	//--zd--
-	public long auupAuthorNum;
-	public long getAuupAuthorNum() {
-		return auupAuthorNum;
+	public Integer getAuupId() {
+		return auupId;
 	}
-	public void setAuupAuthorNum(long auupAuthorNum) {
-		this.auupAuthorNum = auupAuthorNum;
-	}
-	//--至此--
 
-	public int getAuupAuthId() {
+	public void setAuupId(Integer auupId) {
+		this.auupId = auupId;
+	}
+
+	public Integer getAuupAuthId() {
 		return auupAuthId;
 	}
 
-	public void setAuupAuthId(int auupAuthId) {
+	public void setAuupAuthId(Integer auupAuthId) {
 		this.auupAuthId = auupAuthId;
 	}
 
@@ -83,5 +82,4 @@ public class AuthorUpdate {
 	public void setAuupAttr5(String auupAttr5) {
 		this.auupAttr5 = auupAttr5;
 	}
-
 }

@@ -1,18 +1,18 @@
 package com.swust.kelab.dao.query;
 
+import com.mongodb.DBObject;
 import com.swust.kelab.dao.base.PageInfo;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 /**
  * 查询基础类
  * <p>
  * 如果查询结果需要使用分页，则请设置{@link PageInfo},默认不使用分页查询
  */
-public abstract class AbstractQuery implements Serializable {
+public class BaseQuery implements Serializable {
     private static final long serialVersionUID = -2379671566690754406L;
 
     /**
@@ -42,18 +42,31 @@ public abstract class AbstractQuery implements Serializable {
     /**
      * 模糊查询多个字段
      */
-    private List<String> searchFields;
+    private DBObject searchFields;
 
     /**
      * 模糊查询的value
      */
     private String searchValue;
 
-    public List<String> getSearchFields() {
+    /**
+     * 查询条件
+     */
+    private DBObject query;
+
+    public DBObject getQuery() {
+        return query;
+    }
+
+    public void setQuery(DBObject query) {
+        this.query = query;
+    }
+
+    public DBObject getSearchFields() {
         return searchFields;
     }
 
-    public void setSearchFields(List<String> searchFields) {
+    public void setSearchFields(DBObject searchFields) {
         this.searchFields = searchFields;
     }
 

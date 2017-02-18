@@ -1,6 +1,8 @@
-package com.swust.kelab.domain.model;
+package com.swust.kelab.dao.domain;
 
-public class TempWorksComment {
+import com.swust.kelab.dao.query.BaseModel;
+
+public class TempWorksComment extends BaseModel{
 	private Integer wocoId;
 	private Integer wocoWorkId;
 	private Integer wocoParentId;

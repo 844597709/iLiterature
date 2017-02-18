@@ -1,4 +1,4 @@
-package com.swust.kelab.domain.model;
+package com.swust.kelab.dao.domain;
 
 /**
  * Created by zengdan on 2017/1/6.

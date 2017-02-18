@@ -14,20 +14,25 @@
 	<context:property-placeholder location="classpath:mongodb.properties" />
 
 	<!-- mongo对象 -->
-	<mongo:mongo-client id="mongo" replica-set="${mongo.hostport}">
-		<mongo:client-options connections-per-host="${mongo.connectionsPerHost}"
+	<mongo:mongo id="mongo" host="${mongo.host}" port="${mongo.port}"><!--replica-set="${mongo.hostport}"-->
+		<!--<mongo:client-options connections-per-host="${mongo.connectionsPerHost}"
 							  threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"
 							  connect-timeout="${mongo.connectTimeout}"
 							  max-wait-time="${mongo.maxWaitTime}"
 							  socket-keep-alive="${mongo.socketKeepAlive}"
-							  socket-timeout="${mongo.socketTimeout}" />
-	</mongo:mongo-client>
+							  socket-timeout="${mongo.socketTimeout}" />-->
+	</mongo:mongo>
 
-	<mongo:db-factory dbname="database" mongo-ref="mongo" />
+	<mongo:db-factory id="mongoDbFactory" dbname="${mongo.databaseName}" mongo-ref="mongo" />
+
+	<!--<bean id ="mongoDbFactory" class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">-->
+		<!--<constructor-arg ref="mongo"/>-->
+		<!--<constructor-arg value="${mongo.databaseName}"/>-->
+	<!--</bean>-->
 
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-		<constructor-arg ref="mongo" />
-		<constructor-arg value="${mongo.databaseName}" /><!--databaseName-->
+		<constructor-arg ref="mongoDbFactory" />
+		<!--<constructor-arg value="${mongo.databaseName}" />&lt;!&ndash;databaseName&ndash;&gt;-->
 	</bean>
 
 </beans>

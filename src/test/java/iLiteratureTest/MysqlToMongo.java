@@ -254,8 +254,8 @@ public class MysqlToMongo {
 //            String collectionName="column";
 //            String space="tempColumn";
 
-//            String collectionName="crawlwebsite";
-//            String space="tempCrawlWebsite";
+            String collectionName="crawlwebsite";
+            String space="tempCrawlWebsite";
 
 //            String collectionName="systemparameter";
 //            String space="tempSystemParameter";
@@ -263,8 +263,8 @@ public class MysqlToMongo {
 //            String collectionName="user";
 //            String space="tempUser";
 
-            String collectionName="website";
-            String space="tempWebsite";
+//            String collectionName="website";
+//            String space="tempWebsite";
             //获取mongodb连接
             MongoDatabase database = getMongoConn(databaseName);
             MongoCollection collection = database.getCollection(collectionName);

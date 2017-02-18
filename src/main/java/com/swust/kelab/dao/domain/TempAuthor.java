@@ -1,6 +1,8 @@
-package com.swust.kelab.domain.model;
+package com.swust.kelab.dao.domain;
 
-public class TempAuthor {
+import com.swust.kelab.dao.query.BaseModel;
+
+public class TempAuthor extends BaseModel{
 	private Integer authId;
 	private Integer authWebsiteId;
 	private String authUrl;
