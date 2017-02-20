@@ -1,28 +1,8 @@
 package com.swust.kelab.web.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.swust.kelab.domain.Area;
-import com.swust.kelab.domain.Author;
-import com.swust.kelab.domain.AuthorUpdate;
-import com.swust.kelab.service.web.AuthorService;
-import com.swust.kelab.web.json.JsonAndView;
-import com.swust.kelab.web.model.EPOQuery;
-import com.swust.kelab.web.model.NameValuePair;
-import com.swust.kelab.web.model.QueryData;
-
-@Controller
-@RequestMapping("author")
-public class AuthorController {
+//@Controller
+//@RequestMapping("author")
+/*public class AuthorController {
 	@Resource
 	private AuthorService authorService;
 
@@ -188,4 +168,4 @@ public class AuthorController {
 		return jv;
 	}
 
-}
+}*/

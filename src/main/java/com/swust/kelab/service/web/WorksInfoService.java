@@ -1,41 +1,23 @@
 package com.swust.kelab.service.web;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang.ArrayUtils;
-import org.springframework.stereotype.Service;
-
 import com.google.common.collect.Lists;
-import com.swust.kelab.domain.Area;
-import com.swust.kelab.domain.Comment;
-import com.swust.kelab.domain.CommentFreqs;
-import com.swust.kelab.domain.DescriptionFreqs;
-import com.swust.kelab.domain.WorkDescription;
-import com.swust.kelab.domain.WorkDetail;
-import com.swust.kelab.domain.WorksInfo;
-import com.swust.kelab.domain.WorksUpdate;
-import com.swust.kelab.repos.AuthorDao;
+import com.swust.kelab.domain.*;
 import com.swust.kelab.repos.WorksInfoDao;
 import com.swust.kelab.repos.bean.GenericQuery;
 import com.swust.kelab.repos.bean.ListQuery;
-import com.swust.kelab.web.model.AuthorWorkUpdate;
-import com.swust.kelab.web.model.EPOQuery;
-import com.swust.kelab.web.model.NameValuePair;
-import com.swust.kelab.web.model.PageData;
-import com.swust.kelab.web.model.QueryData;
+import com.swust.kelab.web.model.*;
+import org.apache.commons.lang.ArrayUtils;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service(value = "worksInfoService")
 public class WorksInfoService {
-    @Resource
-    private AuthorDao authorDao;
+    /*@Resource
+    private AuthorDao authorDao;*/
     @Resource
     private WorksInfoDao worksInfoDao;
     @Resource

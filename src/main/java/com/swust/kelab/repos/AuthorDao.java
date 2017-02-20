@@ -1,19 +1,7 @@
 package com.swust.kelab.repos;
 
-import com.swust.kelab.domain.Area;
-import com.swust.kelab.domain.Author;
-import com.swust.kelab.domain.AuthorUpdate;
-import com.swust.kelab.repos.bean.ListQuery;
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.stereotype.Repository;
-
-import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-@Repository(value = "authorDao")
-public class AuthorDao {
+//@Repository(value = "authorDao")
+/*public class AuthorDao {
 	@Resource
 	private SqlSession sqlSession;
 //	@Resource
@@ -94,4 +82,4 @@ public class AuthorDao {
 	}
 	
 
-}
+}*/

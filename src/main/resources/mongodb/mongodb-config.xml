@@ -35,4 +35,6 @@
 		<!--<constructor-arg value="${mongo.databaseName}" />&lt;!&ndash;databaseName&ndash;&gt;-->
 	</bean>
 
+
+	<context:component-scan base-package="com.swust.kelab.dao" />
 </beans>

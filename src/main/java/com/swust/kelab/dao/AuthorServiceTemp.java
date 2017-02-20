@@ -1,4 +1,4 @@
-package com.swust.kelab.service.web;
+package com.swust.kelab.dao;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
@@ -6,13 +6,14 @@ import com.google.common.collect.Maps;
 import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import com.swust.kelab.dao.AuthorDao;
 import com.swust.kelab.dao.base.PageResult;
 import com.swust.kelab.dao.domain.TempAuthor;
+import com.swust.kelab.dao.model.Area;
 import com.swust.kelab.dao.query.BaseQuery;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ import java.util.Map;
 @Service(value = "authorService")
 public class AuthorServiceTemp {
 	@Resource
-	private AuthorDao authorDao;
+	private AuthorDaoTemp authorDao;
 
 	/**
 	 * 分页查询作者信息
@@ -43,17 +44,20 @@ public class AuthorServiceTemp {
 	/**
 	 * 统计性别
 	 */
-	public Map<String, Integer> countInfoGender(int wesiId) throws Exception {
+	public Map<String, Integer> countInfoGender(Integer wesiId) {
 		Map<String, Integer> map = Maps.newHashMap();
-		DBObject match = new BasicDBObject("$match", new BasicDBObject("authWebsiteId", wesiId));
 		DBObject queryFields = new BasicDBObject();
-		queryFields.put("_id", "authGender");
+		queryFields.put("_id", "$authGender");
 		queryFields.put("value", new BasicDBObject("$sum", 1));
 		DBObject group = new BasicDBObject("$group", queryFields);
 		List<DBObject> list = Lists.newArrayList();
-		list.add(match);
+		if(wesiId!=null){
+			DBObject match = new BasicDBObject("$match", new BasicDBObject("authWebsiteId", wesiId));
+			list.add(match);
+		}
 		list.add(group);
 		AggregationOutput output = authorDao.getDBCollection().aggregate(list);
+		System.out.println(output.toString());
 		Iterator<DBObject> iter = output.results().iterator();
 		while(iter.hasNext()){
 			DBObject obj = iter.next();
@@ -69,15 +73,17 @@ public class AuthorServiceTemp {
 	/**
 	 * 统计省份作者数
 	 */
-	private Map<String, Integer> countInfoArea(Integer wesiId) {
+	public Map<String, Integer> countInfoArea(Integer wesiId) {
 		Map<String, Integer> map = Maps.newHashMap();
-		DBObject match = new BasicDBObject("$match", new BasicDBObject("authWebsiteId", wesiId));
 		DBObject queryFields = new BasicDBObject();
 		queryFields.put("_id", "$authArea");
-		queryFields.put("sum", new BasicDBObject("$sum", 1));
+		queryFields.put("value", new BasicDBObject("$sum", 1));
 		DBObject group = new BasicDBObject("$group", queryFields);
 		List<DBObject> list = Lists.newArrayList();
-		list.add(match);
+		if(wesiId!=null){
+			DBObject match = new BasicDBObject("$match", new BasicDBObject("authWebsiteId", wesiId));
+			list.add(match);
+		}
 		list.add(group);
 		AggregationOutput output = authorDao.getDBCollection().aggregate(list);
 		Iterator<DBObject> iter = output.results().iterator();
@@ -85,21 +91,48 @@ public class AuthorServiceTemp {
 		while(iter.hasNext()){
 			DBObject obj = iter.next();
 			String json = JSON.toJSONString(obj);
-			com.swust.kelab.dao.model.Area area = JSON.parseObject(json, com.swust.kelab.dao.model.Area.class);
+			Area area = JSON.parseObject(json, Area.class);
 			//get_id暂时
-			String name = area.get_id().split("-")[0].trim();//获取省份名称
-			if(map.keySet().contains(name)){
-				Integer oldValue = map.get(name);
-				map.put(name, oldValue+area.getValue());
-			}else{
-				map.put(name, area.getValue());
+			if(area.get_id()!="" && area.get_id()!=null){
+				String name = area.get_id().split("-")[0].trim();//获取省份名称
+				if(map.keySet().contains(name)){
+					Integer oldValue = map.get(name);
+					map.put(name, oldValue+area.getValue());
+				}else{
+					map.put(name, area.getValue());
+				}
+				num+=area.getValue();
 			}
-			num+=area.getValue();
 		}
 		System.out.println("总数num:"+num);
 		return map;
 	}
 
+	public Map<String, Object> countAuthorInfo(Integer websiteId, String worksR, String hitsR, String commentsR, String recomsR){
+		String[] works = worksR.split(",");
+		String[] hits = hitsR.split(",");
+		String[] comments = commentsR.split(",");
+		String[] recoms = recomsR.split(",");
+		long timea = System.currentTimeMillis();
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("authWorksNum", getNum(websiteId, "authWorksNum", works));
+		map.put("authWorksHitsNum", getNum(websiteId, "authWorksHitsNum", hits));
+		map.put("authWorksCommentsNum", getNum(websiteId, "authWorksCommentsNum", comments));
+		map.put("authWorksRecomsNum", getNum(websiteId, "authWorksRecomsNum", recoms));
+		long timeaa = System.currentTimeMillis();
+		System.out.println("service: countAuthorInfo--消耗"+(timeaa-timea)+"ms");
+		return map;
+	}
+
+	private List<Integer> getNum(Integer websiteId, String field, String[] ranges){
+		List<Integer> list = new ArrayList<Integer>();
+		for(int i=0; i<ranges.length-1; i++){
+			Integer start = Integer.parseInt(ranges[i]);
+			Integer end = Integer.parseInt(ranges[i+1]);
+			list.add(authorDao.getNum(websiteId, field, start, end));
+		}
+		return list;
+	}
 	// lj
 	/*private String getNumStr(int type, long a, long b) {
 		if (type == 4) {

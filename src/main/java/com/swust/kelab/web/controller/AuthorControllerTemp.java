@@ -1,15 +1,19 @@
 package com.swust.kelab.web.controller;
 
+import com.google.common.collect.Lists;
 import com.swust.kelab.dao.base.PageResult;
 import com.swust.kelab.dao.domain.TempAuthor;
+import com.swust.kelab.dao.model.Area;
 import com.swust.kelab.dao.query.AuthorQuery;
-import com.swust.kelab.service.web.AuthorServiceTemp;
+import com.swust.kelab.dao.AuthorServiceTemp;
 import com.swust.kelab.web.json.JsonAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("author")
@@ -62,19 +66,31 @@ public class AuthorControllerTemp {
 		Map<String, Long> result = authorService.countInfo();
 		jv.addData("result", result);
 		return jv;
-	}
+	}*/
 
 	// liujie siteId=0 查找全部
 	@RequestMapping(value = "/countInfoGender", method = RequestMethod.POST)
 	public JsonAndView countAuthorGender(Integer siteId) throws Exception {
 		JsonAndView jv = new JsonAndView();
-		Map<String, Long> result = authorService.countInfoGender(siteId);
+		Map<String, Integer> result = authorService.countInfoGender(siteId);
 		jv.addData("result", result);
 		return jv;
 	}
 
-	// liujie siteId=0 查找全部
 	@RequestMapping(value = "/countInfoArea", method = RequestMethod.POST)
+	public JsonAndView countAuthorArea(Integer siteId) {
+		JsonAndView jv = new JsonAndView();
+		Map<String, Integer> map = authorService.countInfoArea(siteId);
+		List<Area> list = Lists.newArrayList();
+		for(Map.Entry<String, Integer> entry:map.entrySet()){
+			Area area = new Area(entry.getKey(), entry.getValue());
+			list.add(area);
+		}
+		jv.addData("result", list);
+		return jv;
+	}
+	// liujie siteId=0 查找全部
+	/*@RequestMapping(value = "/countInfoArea", method = RequestMethod.POST)
 	public JsonAndView countAuthorArea(Integer siteId) throws Exception {
 		JsonAndView jv = new JsonAndView();
 		List<Area> list=	authorService.countAreaInfo( siteId);
@@ -85,32 +101,14 @@ public class AuthorControllerTemp {
 		jv.addData("maxProvinceNum", area.getValue());
 		jv.addData("result", list);
 		return jv;
-	}
+	}*/
 
-	// liujie 根据作者信息（1点击量、2评论数、3推荐数、4作品数）查询对应作者数量
-	// 此函数已舍弃，要用注意增加siteId
-	@RequestMapping(value = "/countInfoNum", method = RequestMethod.POST)
-	public JsonAndView countAuthorNum(Integer type, String range) throws Exception {
-		JsonAndView jv = new JsonAndView();
-		if (type < 1 || type > 4 || range == null) {
-			jv.setRet(false);
-			jv.setErrcode(601);
-			jv.setErrmsg("数据范围错误");
-			return jv;
-		}
-		// List<NameValuePair> result = authorService.countInfoNum(type, range);
-		List<NameValuePair> result = authorService.countInfoNumByJava(type, range, null);
-		jv.addData("result", result);
-		return jv;
-	}
-
-	// liujie 一次全部查出作者统计：range1~4：1点击量、2评论数、3推荐数、4作品数
+	//一次全部查出作者统计：range1~4：1作品数、2点击量、3评论数、4推荐数
 	@RequestMapping(value = "/countInfoNumAll", method = RequestMethod.POST)
-	public JsonAndView countAuthorNumAll(String range1, String range2, String range3, String range4, Integer siteId)
+	public JsonAndView countAuthorNumAll(Integer websiteId, String worksR, String hitsR, String commentsR, String recomsR)
 			throws Exception {
-		System.out.println(range1+" "+range2+" "+range3+" "+range4+" "+siteId);
 		JsonAndView jv = new JsonAndView();
-		Map<String, Object> map = authorService.countInfoNumAll(range1, range2, range3, range4, siteId);
+		Map<String, Object> map = authorService.countAuthorInfo(websiteId, worksR, hitsR, commentsR, recomsR);
 		if (map == null || map.size() == 0) {
 			jv.setRet(false);
 			jv.setErrcode(601);// 随便写的哈
@@ -119,6 +117,6 @@ public class AuthorControllerTemp {
 		}
 		jv.addData("result", map);
 		return jv;
-	}*/
+	}
 
 }

@@ -1,6 +1,6 @@
 package com.swust.kelab.service.web;
 
-import com.swust.kelab.dao.AuthorDao;
+import com.swust.kelab.dao.AuthorDaoTemp;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 @Service(value = "authorUpdateService")
 public class AuthorUpdateServiceTemp {
 	@Resource
-	private AuthorDao authorDao;
+	private AuthorDaoTemp authorDao;
 
 	/**
 	 * 分页查询作者信息
