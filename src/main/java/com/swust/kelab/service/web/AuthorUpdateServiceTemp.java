@@ -1,6 +1,6 @@
 package com.swust.kelab.service.web;
 
-import com.swust.kelab.dao.AuthorDaoTemp;
+import com.swust.kelab.mongo.dao.AuthorDaoTemp;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

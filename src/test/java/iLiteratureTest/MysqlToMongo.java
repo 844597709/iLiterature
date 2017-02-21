@@ -29,7 +29,7 @@ public class MysqlToMongo {
     @Resource
     private MysqlDao mysqlDao;
 //    private static RiskBusinessDao riskBusinessDao = new RiskBusinessDaoImpl();
-    public static final String url = "jdbc:mysql://127.0.0.1:3306/iliterature";
+    public static final String url = "jdbc:mysql://127.0.0.1:3306/iliterature_new";
     public static final String name = "com.mysql.cj.jdbc.Driver";
     public static final String user = "root";
     public static final String password = "150801";
@@ -236,8 +236,8 @@ public class MysqlToMongo {
         try{
             String databaseName="iLiterature";
 
-//            String collectionName="author";
-//            String space="tempAuthor";
+            String collectionName="author";
+            String space="tempAuthor";
 
 //            String collectionName="authorupdate";
 //            String space="tempAuthorUpdate";
@@ -254,8 +254,8 @@ public class MysqlToMongo {
 //            String collectionName="column";
 //            String space="tempColumn";
 
-            String collectionName="crawlwebsite";
-            String space="tempCrawlWebsite";
+//            String collectionName="crawlwebsite";
+//            String space="tempCrawlWebsite";
 
 //            String collectionName="systemparameter";
 //            String space="tempSystemParameter";

@@ -1,8 +1,8 @@
 package iLiteratureTest;
 
 import com.google.common.collect.Lists;
-import com.swust.kelab.dao.model.Area;
-import com.swust.kelab.dao.AuthorServiceTemp;
+import com.swust.kelab.mongo.dao.model.Area;
+import com.swust.kelab.mongo.service.AuthorServiceTemp;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

@@ -1,11 +1,11 @@
 package com.swust.kelab.web.controller;
 
 import com.google.common.collect.Lists;
-import com.swust.kelab.dao.base.PageResult;
-import com.swust.kelab.dao.domain.TempAuthor;
-import com.swust.kelab.dao.model.Area;
-import com.swust.kelab.dao.query.AuthorQuery;
-import com.swust.kelab.dao.AuthorServiceTemp;
+import com.swust.kelab.mongo.dao.base.PageResult;
+import com.swust.kelab.mongo.dao.domain.TempAuthor;
+import com.swust.kelab.mongo.dao.model.Area;
+import com.swust.kelab.mongo.dao.query.AuthorQuery;
+import com.swust.kelab.mongo.service.AuthorServiceTemp;
 import com.swust.kelab.web.json.JsonAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

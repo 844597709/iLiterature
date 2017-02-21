@@ -5,6 +5,7 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>
 			classpath:spring/applicationContext.xml,
+			classpath:mongodb/mongodb-config.xml,
 			classpath:spring/dao.xml,
 			classpath:spring/service.xml
 		</param-value>

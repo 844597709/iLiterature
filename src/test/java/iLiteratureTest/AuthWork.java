@@ -1,7 +1,7 @@
 package iLiteratureTest;
 
-import com.swust.kelab.dao.domain.TempWorks;
-import com.swust.kelab.dao.query.BaseModel;
+import com.swust.kelab.mongo.dao.domain.TempWorks;
+import com.swust.kelab.mongo.dao.query.BaseModel;
 
 import java.util.List;
 
